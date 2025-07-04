@@ -33,7 +33,7 @@ Official PyTorch implementation of **PointGAC: Geometric-Aware Codebook for Mask
 
 - **Installation Steps**: 
 
-  For detailed instructions on setting up the environment, please refer to the [install.md](install.md) file.
+  For detailed instructions on setting up the environment, please refer to the [install.md](Install.md) file.
 
 ## 📁**Datasets**
 
