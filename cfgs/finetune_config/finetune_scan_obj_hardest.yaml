@@ -1,0 +1,71 @@
+training:
+  # Optimizer configuration
+  optimizer:
+    type: AdamW                       # Optimizer type
+    clip_grad: 10                     # Gradient clipping threshold to prevent gradient explosion
+
+  # Learning rate scheduler configuration
+  scheduler:
+    type: CosSche                     # Scheduler type set to cosine decay
+    epochs: 300                       # Total number of training epochs
+
+    lr_warmup_epochs: 10              # Number of warmup epochs for learning rate
+    wd_warmup_epochs: 0               # Number of warmup epochs for weight decay
+
+    warmup_lr: 0.000001               # Learning rate at the start of warmup phase
+    base_lr: 0.0005                   # Learning rate at the end of warmup phase
+    final_lr: 0.000001                # Learning rate to gradually decay to
+
+    warmup_weight_decay: 0.05         # Weight decay rate at the start of warmup phase
+    base_weight_decay: 0.05           # Weight decay rate at the end of warmup phase
+    final_weight_decay: 0.05          # Weight decay rate to gradually decay to
+
+
+# Model configuration
+model:
+  NAME: PointTransformerCls           # Model name
+  npoints: 2048                       # Number of input points
+
+  tokenizer:
+    num_group: 128                    # Number of groups
+    group_size: 32                    # Number of points per group
+    in_dim: 3                         # Input dimension of the token
+    out_dim: 384                      # Output dimension of the token
+
+  pos_emd:
+    in_dim: 3                         # Input dimension
+    hidden_dim: 128                   # Hidden dimension
+    out_dim: 384                      # Output dimension
+
+  model:
+    trans_dim: 384                    # Transformer embedding dimension
+    encoder_depth: 12                 # Number of encoder layers
+    num_heads: 6                      # Number of attention heads in Transformer encoder
+    drop_path_rate: 0.1               # Drop path regularization rate
+
+  cls_head:
+    in_dim: 384                       # Input dimension
+    hidden_dim: 256                   # Hidden dimension
+    cls_dim: 15                       # Number of classes
+
+
+# Define common parameters
+common_params: &common_params
+  base: cfgs/dataset_configs/ScanObjectNN_Object_Hardest.yaml
+  batch_size: 20
+  num_workers: 0
+  shuffle: True
+  drop_last: True
+  npoints: 2048
+  aug_list: [ "sample2048", "scale", "translate", "Normalization" ]
+
+# Define datasets
+train_dataset:
+  <<: *common_params
+  others: { subset: train }
+
+val_dataset:
+  <<: *common_params
+  shuffle: False
+  aug_list: [ "sample2048", "Normalization" ]  # Override augmentation list
+  others: { subset: test }

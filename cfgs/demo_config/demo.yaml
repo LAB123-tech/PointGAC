@@ -1,0 +1,35 @@
+# Model Configuration
+model:
+  NAME: PointGAC                      # Model name
+  npoints: 1024                       # Number of input points
+
+  tokenizer:
+    num_group: 128                    # Number of groups
+    group_size: 32                    # Number of points per group
+    in_dim: 3                         # Input dimension of the token
+    out_dim: 384                      # Output dimension of the token
+
+  pos_emd:
+    in_dim: 3                         # Input dimension
+    hidden_dim: 128                   # Hidden dimension
+    out_dim: 384                      # Output dimension
+
+  student_model:
+    trans_dim: 384                    # Embedding dimension of the Transformer
+    encoder_depth: 12                 # Number of encoder layers
+    decoder_depth: 4                  # Number of decoder layers
+    num_heads: 6                      # Number of attention heads in Transformer encoder
+    drop_path_rate: 0.1               # Drop Path regularization rate
+    mask_type: 'rand'                 # Masking type, random masking
+    mask_ratio: 0.65                  # Masking ratio
+
+  dict:
+    num_words: 2048                   # Number of vectors in the dictionary
+    dic_dim: 384                      # Dimension of vectors in the dictionary
+    dic_momentum: 0.9                 # Momentum for online dictionary updates
+    max_buffer_size: 10000            # Size of the anchor feature buffer
+
+  regressor:
+    in_dim: 384                       # Input dimension
+    hidden_dim: 384                   # Hidden dimension
+    out_dim: 384                      # Output dimension

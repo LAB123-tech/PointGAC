@@ -1,0 +1,5 @@
+NAME: ModelNet
+PC_PATH: data/ModelNet40
+#PC_PATH: /root/data-tmp/data/ModelNet40/
+NUM_CATEGORY: 40
+USE_NORMALS: FALSE

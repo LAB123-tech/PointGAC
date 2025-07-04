@@ -1,0 +1,3 @@
+NAME: ShapeNet
+#DATA_PATH: /root/data-tmp/data/ShapeNet/
+DATA_PATH: data/ShapeNet

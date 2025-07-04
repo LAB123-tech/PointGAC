@@ -1,0 +1,5 @@
+NAME: ShapeNetPart
+DATA_PATH: data/ShapeNetPart
+NUM_PART: 50
+NUM_CATEGORY: 16
+USE_NORMALS: FALSE

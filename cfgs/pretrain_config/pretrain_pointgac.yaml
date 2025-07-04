@@ -1,0 +1,119 @@
+training:
+  visualization_interval: 50          # 每隔50个周期可视化一下特征分布
+  # 优化器配置
+  optimizer:
+    type: AdamW                       # 优化器类型
+    clip_grad: 3.0                    # 梯度裁剪阈值，防止梯度爆炸
+
+  # 学习率调度器配置
+  scheduler:
+    type: CosSche                     # 类型设置为余弦衰退
+    epochs: 800                       # 总训练轮数
+
+    lr_warmup_epochs: 80              # 学习率预热轮数
+    wd_warmup_epochs: 0               # 权重衰减预热轮数
+    ema_warmup_epochs: 100            # ema温度预热轮数
+    tau_T_warmup_epochs: 200          # tau_T预热轮数
+    tau_S_warmup_epochs: 0            # tau_S预热轮数
+
+    warmup_lr: 0.000001               # 学习率-----预热阶段开始
+    base_lr: 0.002                    # 学习率-----预热阶段到这里
+    final_lr: 0.000001                # 学习率-----逐步衰减到这里
+
+    warmup_weight_decay: 0.05         # 权重衰减率-----预热阶段开始
+    base_weight_decay: 0.05           # 权重衰减率-----预热阶段到这里
+    final_weight_decay: 0.05          # 权重衰减率-----逐步衰减到这里
+
+    warmup_ema: 0.9998                # ema温度-----预热阶段开始
+    base_ema: 0.99999                 # ema温度-----预热阶段到这里
+    final_ema: 0.99999                # ema温度-----逐步衰减到这里
+
+    warmup_tau_T: 0.025               # 教师分配温度-----预热阶段开始
+    base_tau_T: 0.025                 # 教师分配温度-----热启动到这里
+    final_tau_T: 0.025                # 教师分配温度-----逐步衰减到这里
+
+    warmup_tau_S: 0.1                 # 学生分配温度-----预热阶段开始
+    base_tau_S: 0.1                   # 学生分配温度-----热启动到这里
+    final_tau_S: 0.1                  # 学生分配温度-----逐步衰减到这里
+
+# 模型配置
+model:
+  NAME: PointGAC                      # 模型名称
+  npoints: 1024                       # 输入点的数量
+
+  tokenizer:
+    num_group: 64                     # 分组的数量
+    group_size: 32                    # 每组的点数量
+    in_dim: 3                         # token的输入维度
+    out_dim: 384                      # token的输出维度
+
+  pos_emd:
+    in_dim: 3                         # 输入的维度
+    hidden_dim: 128                   # 中间的维度
+    out_dim: 384                      # 输出的维度
+
+  student_model:
+    trans_dim: 384                    # Transformer的嵌入维度
+    encoder_depth: 12                 # 编码器的层数
+    decoder_depth: 4                  # 解码器的层数
+    num_heads: 6                      # Transformer编码器中的多头注意力头数
+    drop_path_rate: 0.1               # Drop Path正则化的比率
+    mask_type: 'rand'                 # 掩码类型，随机掩码
+    mask_ratio: 0.65                  # 掩码比率
+
+  dict:
+    num_words: 2048                   # 字典中向量的数量
+    dic_dim: 384                      # 字典中向量的维度
+    dic_momentum: 0.9                 # 在线更新字典的速度
+    max_buffer_size: 10000            # 锚点特征缓冲池大小
+
+  regressor:
+    in_dim: 384                       # 输入的维度
+    hidden_dim: 384                   # 中间的维度
+    out_dim: 384                      # 输出的维度
+
+
+# 定义公共参数集
+common_params: &common_params
+  batch_size: 2
+  num_workers: 0
+  shuffle: True
+  drop_last: True
+  npoints: 1024
+  aug_list: [ "sample1024", "scale", "translate", "Normalization" ]
+
+# 定义数据集
+train_dataset:
+  base: cfgs/dataset_configs/ShapeNet.yaml
+  <<: *common_params
+  others: { subset: train }
+
+extra_train_dataset:
+  base: cfgs/dataset_configs/ModelNet40.yaml
+  <<: *common_params
+  aug_list: [ "sample1024", "Normalization" ]  # 覆盖数据增强列表
+  others: { subset: train }
+
+val_dataset:
+  base: cfgs/dataset_configs/ModelNet40.yaml
+  <<: *common_params
+  shuffle: False
+  aug_list: [ "sample1024", "Normalization" ]  # 覆盖数据增强列表
+  others: { subset: test }
+
+test_dataset:
+  base: cfgs/dataset_configs/ModelNet40.yaml
+  <<: *common_params
+  shuffle: False
+  aug_list: [ "sample1024", "Normalization" ]  # 覆盖数据增强列表
+  others: { subset: test }
+
+
+
+
+
+
+
+
+
+
