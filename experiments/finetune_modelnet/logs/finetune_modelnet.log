@@ -1,0 +1,2 @@
+2025-04-19 - INFO - [Board] Deleted existing TensorBoard log directory: ./experiments/finetune_modelnet/tfboard
+2025-04-19 - INFO - [Random] Set random seed to 42

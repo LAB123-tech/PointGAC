@@ -1,0 +1,2 @@
+2025-07-03 - INFO - [Board] Deleted existing TensorBoard log directory: ./experiments/pretrain/tfboard
+2025-07-03 - INFO - [Random] Set random seed to 42

@@ -1,0 +1,5 @@
+import datasets.ShapeNetDataset
+import datasets.ModelNetDataset
+import datasets.ShapeNetPartDataset
+import datasets.ScanObjectNNDataset
+import datasets.ModelNetDatasetFewShot
