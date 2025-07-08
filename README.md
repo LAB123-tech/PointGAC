@@ -1,4 +1,4 @@
-# 🔷**PointGAC**
+# 🔷**[PointGAC](https://arxiv.org/abs/2507.04801)**
 
 Official PyTorch implementation of **PointGAC: Geometric-Aware Codebook for Masked Point Cloud Modeling**
 
