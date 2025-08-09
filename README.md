@@ -213,7 +213,12 @@ Official PyTorch implementation of **PointGAC: Geometric-Aware Codebook for Mask
 If you find this repository useful, please consider citing our work🚀
 
 ```
-
+@article{li2025pointgac,
+  title={PointGAC: Geometric-Aware Codebook for Masked Point Cloud Modeling},
+  author={Li, Abiao and Lv, Chenlei and Fang, Yuming and Zuo, Yifan and Zhang, Jian and Mei, Guofeng},
+  journal={arXiv preprint arXiv:2507.04801},
+  year={2025}
+}
 ```
 
 
