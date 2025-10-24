@@ -22,8 +22,6 @@ Official PyTorch implementation of **PointGAC: Geometric-Aware Codebook for Mask
 - [x] Provide code for finetune on for ModelNet40, ScanObjectNN, ShapeNetPart
 - [x] Provide inference scripts for ModelNet40
 - [x] Provide visualization code for inspecting model outputs
-- [ ] Extend to larger-scale datasets  
-- [ ] Provide code for fine-tuning on point cloud completion
 
 ## ⚙️**Installation**
 
