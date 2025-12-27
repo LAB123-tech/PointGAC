@@ -211,13 +211,12 @@ Official PyTorch implementation of **PointGAC: Geometric-Aware Codebook for Mask
 If you find this repository useful, please consider citing our work🚀
 
 ```
-@InProceedings{Li_2025_ICCV,
-    author    = {Li, Abiao and Lv, Chenlei and Fang, Yuming and Zuo, Yifan and Zhang, Jian and Mei, Guofeng},
-    title     = {PointGAC: Geometric-Aware Codebook for Masked Point Modeling},
-    booktitle = {Proceedings of the IEEE/CVF International Conference on Computer Vision (ICCV)},
-    month     = {October},
-    year      = {2025},
-    pages     = {24989-24998}
+@inproceedings{li2025pointgac,
+  title={PointGAC: Geometric-Aware Codebook for Masked Point Modeling},
+  author={Li, Abiao and Lv, Chenlei and Fang, Yuming and Zuo, Yifan and Zhang, Jian and Mei, Guofeng},
+  booktitle={Proceedings of the IEEE/CVF International Conference on Computer Vision},
+  pages={24989--24998},
+  year={2025}
 }
 ```
 
